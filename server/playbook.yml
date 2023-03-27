@@ -1,0 +1,90 @@
+- hosts: all
+  become: true
+
+  pre_tasks:
+  - name: Actualizar repositorios
+    apt:
+       update_cache: yes
+    tags:
+    - docker
+
+  - name: Install dependencies
+    apt:
+      name:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg2
+        - software-properties-common
+    tags:
+    - docker
+
+  - name: Add Docker key
+    apt_key:
+      url: https://download.docker.com/linux/debian/gpg
+      state: present
+    tags:
+    - docker
+
+  - name: Add Docker repository
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
+      state: present
+    tags:
+    - docker
+
+  - name: Install Docker
+    apt:
+     name: docker-ce
+     state: present
+    tags:
+    - docker
+
+  - name: Download Docker Compose
+    get_url:
+      url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: 'a+rx'
+    tags:
+    - docker
+
+  roles: 
+    - role: oefenweb.ufw
+      vars:
+        ufw_rules:
+        - rule: allow
+          to_port: 22023
+          protocol: tcp
+          comment: SSH
+        - rule: allow
+          to_port: 80
+          protocol: tcp
+          comment: HTTP/1
+        - rule: allow
+          to_port: 443
+          protocol: tcp
+          comment: HTTP/2
+        - rule: allow
+          to_port: 80
+          protocol: udp
+          comment: HTTP/3
+        - rule: allow
+          to_port: 443
+          protocol: udp
+          comment: HTTP/3
+      tags:
+      - ufw
+
+    - role: geerlingguy.certbot
+      vars:
+        certbot_admin_email: "{{ lookup('file', '~/secrets/martabarea.es/certbot_email.txt') }}"
+        certbot_create_if_missing: true
+        certbot_hsts: true
+        certbot_certs:
+          - email: "{{ lookup('file', '~/secrets/martabarea.es/certbot_email.txt') }}"
+            webroot: /var/www/martabarea-blog
+            domains:
+              - martabarea.es
+              - www.martabarea.es
+      tags:
+      - certbot

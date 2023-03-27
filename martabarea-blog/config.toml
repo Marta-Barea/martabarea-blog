@@ -1,0 +1,48 @@
+baseURL = 'https://martabarea.es/'
+languageCode = 'es-ES'
+theme = "hugo-blog-awesome"
+
+DefaultContentLanguage = "es"
+
+enableEmoji = true
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[menu]
+  [[menu.main]] 
+    pageRef = "/"
+    name = 'Home'
+    url = '/'
+    weight = 10
+  [[menu.main]]
+    pageRef = "posts"
+    name = 'Posts'
+    url = '/posts/'
+    weight = 20
+  [[menu.main]]
+    pageRef = "about"
+    name = 'About'
+    url = '/about/'
+    weight = 30
+[params]
+  sitename = "Entre átomos y algoritmos"
+  defaultColor = "light"
+  description = "Un blog de Química, Machine Learning y DevOps"
+
+[params.author]
+  avatar = ""
+  intro = "Entre átomos y algoritmos"
+  name = "Marta Barea"
+  description = "Un blog de Química, Machine Learning y DevOps"
+
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/Marta-Barea"
+
+[[params.socialIcons]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/marta-barea-sepúlveda-902810160/"

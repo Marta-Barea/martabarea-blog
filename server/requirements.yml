@@ -1,0 +1,4 @@
+- name: oefenweb.ufw
+  version: "v4.1.8"
+- name: geerlingguy.certbot
+  version: "5.0.2"
