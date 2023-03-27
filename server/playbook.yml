@@ -2,7 +2,7 @@
   become: true
 
   pre_tasks:
-  - name: Actualizar repositorios
+  - name: Update repositories
     apt:
        update_cache: yes
     tags:
