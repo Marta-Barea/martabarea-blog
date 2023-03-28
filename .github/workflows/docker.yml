@@ -19,12 +19,12 @@ jobs:
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Build and push Varnish image
-        uses: docker/build-push-action@v2
-        with:
-          context: docker/docker-config/varnish/
-          push: true
-          tags: ghcr.io/marta-barea/martabarea-blog/varnish:latest
+      # - name: Build and push Varnish image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: docker/docker-config/varnish/
+      #     push: true
+      #     tags: ghcr.io/marta-barea/martabarea-blog/varnish:latest
 
       - name: Build and push Nginx image
         uses: docker/build-push-action@v2
@@ -50,7 +50,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
-          source: "./docker/docker-compose.yml"
+          source: "./docker-compose.prod.yml"
           target: "/tmp"
       - name: Connect to server
         uses: appleboy/ssh-action@v0.1.8
@@ -62,4 +62,4 @@ jobs:
           script: |
             sudo chmod +x /usr/local/bin/docker-compose
             cd /tmp/docker
-            docker-compose up -d
+            docker-compose up -d -f docker-compose.prod.yml
