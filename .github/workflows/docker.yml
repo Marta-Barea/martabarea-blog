@@ -52,5 +52,4 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             sudo chmod +x /usr/local/bin/docker-compose
-            sudo ch
             docker-compose -f ./docker/docker-compose.yml up -d
