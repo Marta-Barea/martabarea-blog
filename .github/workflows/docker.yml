@@ -32,6 +32,7 @@ jobs:
           context: docker/docker-config/nginx/
           push: true
           tags: ghcr.io/marta-barea/martabarea-blog/nginx:latest
+          no-cache: true
 
       - name: Install ssh-agent
         run: |
