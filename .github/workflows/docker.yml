@@ -44,7 +44,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Connect to server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
@@ -52,4 +52,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             sudo chmod +x /usr/local/bin/docker-compose
-            docker-compose -f /Users/marta/Documents/GitHub/martabarea-blog/docker/docker-compose.yml up -d
+            sudo ch
+            docker-compose -f ./docker/docker-compose.yml up -d
