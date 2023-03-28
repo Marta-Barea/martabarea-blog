@@ -21,5 +21,3 @@ services:
       - 443
       - 80
     restart: always
-    links:
-      - varnish
