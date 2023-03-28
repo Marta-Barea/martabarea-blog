@@ -62,4 +62,5 @@ jobs:
           script: |
             sudo chmod +x /usr/local/bin/docker-compose
             cd /tmp/docker
-            docker-compose up -d -f docker-compose.prod.yml --force-recreate
+            docker-compose -f docker-compose.prod.yml pull
+            docker-compose -f docker-compose.prod.yml up -d
