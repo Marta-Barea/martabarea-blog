@@ -51,7 +51,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           source: "./docker-compose.prod.yml"
-          target: "/tmp"
+          target: "/tmp/docker"
       - name: Connect to server
         uses: appleboy/ssh-action@v0.1.8
         with:
