@@ -51,7 +51,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            scp -r ./docker/docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp
+            scp -r -P ${{ secrets.PORT }} ./docker/docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp
 
       - name: Connect to server
         uses: appleboy/ssh-action@v0.1.8
