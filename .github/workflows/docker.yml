@@ -24,14 +24,14 @@ jobs:
         with:
           context: docker/docker-config/varnish/
           push: true
-          tags: ghcr.io/Marta-Barea/martabarea-blog/varnish:latest
+          tags: ghcr.io/marta-barea/martabarea-blog/varnish:latest
 
       - name: Build and push Nginx image
         uses: docker/build-push-action@v2
         with:
           context: docker/docker-config/nginx/
           push: true
-          tags: ghcr.io/Marta-Barea/martabarea-blog/nginx:latest
+          tags: ghcr.io/marta-barea/martabarea-blog/nginx:latest
 
       - name: Install ssh-agent
         run: |
