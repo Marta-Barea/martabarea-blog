@@ -6,8 +6,6 @@ services:
     depends_on:
       - nginx
     restart: always
-    ports:
-      - 80:80
     links:
       - nginx
   nginx:
