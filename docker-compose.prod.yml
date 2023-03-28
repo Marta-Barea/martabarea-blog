@@ -1,14 +1,13 @@
 version: '3.8'
 
 services:
-  # varnish:
-  #   build:
-  #     context: ./docker/docker-config/varnish/
-  #   depends_on:
-  #     - nginx
-  #   restart: always
-  #   links:
-  #     - nginx
+  varnish:
+    image: ghcr.io/marta-barea/martabarea-blog/varnish:latest
+    depends_on:
+      - nginx
+    restart: always
+    links:
+      - nginx
   nginx:
     image: ghcr.io/marta-barea/martabarea-blog/nginx:latest
     ports:
