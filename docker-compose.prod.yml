@@ -6,6 +6,8 @@ services:
     depends_on:
       - nginx
     restart: always
+    ports:
+      - 6081:6081
     links:
       - nginx
   nginx:
@@ -19,3 +21,5 @@ services:
       - 443
       - 80
     restart: always
+    links:
+      - varnish
