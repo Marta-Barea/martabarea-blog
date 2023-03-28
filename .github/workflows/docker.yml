@@ -51,4 +51,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
+            sudo usermod -aG docker debian
+            sudo chown root:docker /var/run/docker.sock
             docker-compose -f ./docker/docker-compose.yml up -d
