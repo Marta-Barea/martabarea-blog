@@ -43,6 +43,16 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Copy docker-compose.yml
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            scp -r ./docker/docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp
+
       - name: Connect to server
         uses: appleboy/ssh-action@v0.1.8
         with:
@@ -52,4 +62,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             sudo chmod +x /usr/local/bin/docker-compose
-            docker-compose -f docker/docker-compose.yml up -d
+            cd /tmp
+            docker-compose up -d
