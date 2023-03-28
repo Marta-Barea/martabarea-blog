@@ -44,15 +44,14 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Copy docker-compose.yml
-        uses: appleboy/ssh-action@v0.1.8
+        uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
-          script: |
-            scp -r  -o StrictHostKeyChecking=no -P ${{ secrets.PORT }} ./docker/docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp
-
+          source: "./docker/docker-compose.yml"
+          target: "/tmp"
       - name: Connect to server
         uses: appleboy/ssh-action@v0.1.8
         with:
