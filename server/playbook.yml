@@ -2,51 +2,51 @@
   become: true
 
   pre_tasks:
-  - name: Update repositories
-    apt:
-       update_cache: yes
-    tags:
-    - docker
+    - name: Update repositories
+      apt:
+        update_cache: yes
+      tags:
+      - docker
 
-  - name: Install dependencies
-    apt:
-      name:
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - gnupg2
-        - software-properties-common
-    tags:
-    - docker
+    - name: Install dependencies
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg2
+          - software-properties-common
+      tags:
+      - docker
 
-  - name: Add Docker key
-    apt_key:
-      url: https://download.docker.com/linux/debian/gpg
-      state: present
-    tags:
-    - docker
+    - name: Add Docker key
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+        state: present
+      tags:
+      - docker
 
-  - name: Add Docker repository
-    apt_repository:
-      repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
-      state: present
-    tags:
-    - docker
+    - name: Add Docker repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
+        state: present
+      tags:
+      - docker
 
-  - name: Install Docker
-    apt:
-     name: docker-ce
-     state: present
-    tags:
-    - docker
+    - name: Install Docker
+      apt:
+       name: docker-ce
+       state: present
+      tags:
+      - docker
 
-  - name: Download Docker Compose
-    get_url:
-      url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
-      dest: /usr/local/bin/docker-compose
-      mode: 'a+rx'
-    tags:
-    - docker
+    - name: Download Docker Compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'a+rx'
+      tags:
+      - docker
 
   roles: 
     - role: oefenweb.ufw
