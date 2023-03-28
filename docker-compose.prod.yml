@@ -7,7 +7,7 @@ services:
       - nginx
     restart: always
     ports:
-      - 6081:6081
+      - 80:80
     links:
       - nginx
   nginx:
